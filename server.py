@@ -1,22 +1,23 @@
 import os
 from mcp.server.fastmcp import FastMCP, Context
 from paymcp import PayMCP, Mode, price
-from paymcp.providers import X402Provider
+from paymcp.providers import MockPaymentProvider
 
+# Module-level server object (required by FastMCP Cloud)
 mcp = FastMCP("Waste Audit")
 
-# MockPaymentProvider simulates payments without Stripe or crypto credentials.
-# Swap in StripeProvider / X402Provider when real credentials are available.
+# Initialize PayMCP with MockProvider for testing.
+# Real crypto/Stripe integration will be added later.
 PayMCP(
     mcp,
-    providers=[X402Provider(pay_to=[{"address": "47yaLqSsDFv8ah6gYNVuAgZYWxjakGTeff3UAFarhioo"}])],
-    mode=Mode.X402,
+    providers=[MockPaymentProvider()],
+    mode=Mode.TWO_STEP,
 )
 
 @mcp.tool()
 def list_pricing(ctx: Context) -> str:
     """Free tool: returns the price for the audit."""
-    return "analyze_waste: $0.50 per call. Pay via Solana USDC."
+    return "analyze_waste: $0.50 per call. (Test mode: payments are simulated)"
 
 @mcp.tool()
 @price(0.50, currency="USD")
