@@ -1,6 +1,6 @@
 import os
 from fastmcp import FastMCP, Context
-from paymcp import Mode, price
+from paymcp import PayMCP, Mode, price
 from paymcp.providers import StripeProvider, X402Provider
 
 # Module-level server object (required by FastMCP Cloud)
