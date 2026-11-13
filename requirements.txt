@@ -1,2 +1,2 @@
-﻿fastmcp>=2.0.0
-paymcp>=0.8.0
+fastmcp>=2.0.0
+paymcp>=0.9.0
