@@ -25,4 +25,4 @@ def analyze_waste(log_id: str, ctx: Context) -> str:
     return f"Audit of {log_id}: 215 redundant calls found. Estimated waste: $6.87."
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="streamable-http", host="0.0.0.0", port=9000)
