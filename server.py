@@ -15,7 +15,7 @@ PayMCP(
         StripeProvider(api_key=os.getenv("STRIPE_API_KEY")),
         X402Provider(pay_to=[{"address": "47yaLqSsDFv8ah6gYNVuAgZYWxjakGTeff3UAFarhioo"}]),
     ],
-    mode=Mode.AUTO,
+    mode=Mode.TWO_STEP,
 )
 
 @mcp.tool()
@@ -24,7 +24,7 @@ def list_pricing(ctx: Context) -> str:
     return "analyze_waste: $0.50 per call. Pay via Stripe or Solana USDC."
 
 @mcp.tool()
-@price(amount=0.50, currency="USD")
+@price(0.50, currency="USD")
 def analyze_waste(log_id: str, ctx: Context) -> str:
     """Analyze an agent log for wasted tokens and return a quantified report."""
     # STUB: Replace with ghost-tracer analysis logic.
